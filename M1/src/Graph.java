@@ -21,9 +21,9 @@ public class Graph {
 	
 	
 	static final double INF = Double.POSITIVE_INFINITY;
+	public static final Graph_algo Algo_Graph= new Graph_algo();
 	
-	
-	public static double[][] Create_Graph(String Input,String Output) 
+	public double[][] Create_Graph(String Input,String Output) 
 	{
 
 		
@@ -104,7 +104,7 @@ public class Graph {
 			
 			for(int i=0;i<Slahot;i++)
 			{
-				double arr[] =  Graph_algo.SmallPath(arr_Left_Kod[i],arr_Right_Kod[i],mat);
+				double arr[] =  Algo_Graph.SmallPath(arr_Left_Kod[i],arr_Right_Kod[i],mat);
 			
 				 Writer.write(arr_Left_Kod[i] +" ");
 				 Writer.write(arr_Right_Kod[i] +" ");
@@ -134,7 +134,7 @@ public class Graph {
 		
 	}
 	
-	public static double[][] Create_Graph(String Input) 
+	public double[][] Create_Graph(String Input) 
 	{
 
 
@@ -209,9 +209,9 @@ public class Graph {
 		
 	}
 	
-	public static double[][] Create_Graph(String Input,String Query,String Output)
+	public double[][] Create_Graph(String Input,String Query,String Output)
 	{
-		double Graphs[][] = Graph.Create_Graph(Input);
+		double Graphs[][] = Create_Graph(Input);
 	
 		Scanner scf=null;
 		FileWriter fileWriter=null;
@@ -254,10 +254,10 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	 Graphs = Graph_algo.BLACK_KODKOD(arr, Graphs);
+		    	 Graphs = Algo_Graph.BLACK_KODKOD(arr, Graphs);
 		     }
 		     
-		     double Smallest_Race = Graph_algo.SmallPath(left_kokod,right_kokod,Graphs)[0];
+		     double Smallest_Race = Algo_Graph.SmallPath(left_kokod,right_kokod,Graphs)[0];
 		     if(Smallest_Race!=Double.POSITIVE_INFINITY)
 		     {
 		     Writer.write(Smallest_Race +"");
@@ -286,10 +286,11 @@ public class Graph {
 	}
 	
 
-	public static boolean CMP_FILES(String OutPut,String Comp) throws Exception
+	public static boolean CMP_FILES(String OutPut,String Comp) 
 	{
 		
-		
+		try
+		{
 		FileReader fr_Output = new FileReader(OutPut);
 		BufferedReader br_Output = new BufferedReader(fr_Output);
 		
@@ -322,8 +323,13 @@ public class Graph {
 		 {
 			 return true;
 		 }
-		 return false;
-		 
+	
+		}
+		catch (Exception E)
+		{
+			E.printStackTrace();
+		}
+		return false;
 		 
 		 
 	}
@@ -331,7 +337,8 @@ public class Graph {
     
 	public static void main(String[] args)  {
 		
-		Create_Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");
+	
+
 
 		
 	}

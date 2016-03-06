@@ -9,12 +9,13 @@ public class Graph_algo {
 
 	
 
-	static final double INF = Double.POSITIVE_INFINITY;
+	public static final double INF = Double.POSITIVE_INFINITY;
+	
 	
 	// A Dynamic programming based function to find the shortest path
     // from u to v with exactly k edges.
 	// COMPLEXITY:O(V^3*K)
-	public static double shortestPath(double graph[][], int u, int v, int k,int kodkod)
+	private double shortestPath(double graph[][], int u, int v, int k,int kodkod)
     {
         // Table to be filled up using DP. The value sp[i][j][e] will
         // store weight of the shortest path from i to j with exactly
@@ -60,7 +61,7 @@ public class Graph_algo {
 	
 
   //a&&b
-    public static double[] SmallPath(int p1,int p2,double[][] Graph)
+    public double[] SmallPath(int p1,int p2,double[][] Graph)
     {
     
     	double arr[] = new double[2];// first place is Smallest Path  and Second is Length Slahot 
@@ -83,7 +84,7 @@ public class Graph_algo {
     }
     
     
-    public static double[][] BLACK_KODKOD(int arr[],double[][] Graph)
+    public double[][] BLACK_KODKOD(int arr[],double[][] Graph)
     {
     
     	for(int i=0;i<arr.length;i++)
