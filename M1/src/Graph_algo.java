@@ -84,7 +84,7 @@ public class Graph_algo {
     }
     
     
-    public double[][] BLACK_KODKOD(int arr[],double[][] Graph)
+    public double[][] Black_Kodkod(int arr[],double[][] Graph)
     {
     
     	for(int i=0;i<arr.length;i++)
