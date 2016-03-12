@@ -93,25 +93,15 @@ public class Graph_algo {
     		for(int j=0;j<Graph.length;j++)
     		{
     			
+    			Graph[j][arr[i]] = INF;
+    			Graph[arr[i]][j] = INF;
     			
-				if(j!=arr[i])
-				{
-					Graph[j][arr[i]]=INF;
-				}
-    			
-    			for(int q=0;q<Graph.length;q++)
-    			{
-    			
-    				if(q!=arr[i])
-    				{
-    					Graph[arr[i]][q]=INF;
-    				}
-
-    				
-    			}
+			
     		}
+    		Graph[arr[i]][arr[i]]=0;
     		
     	}
+    	
     	return Graph;
     	
     	
