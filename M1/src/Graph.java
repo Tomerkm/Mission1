@@ -28,7 +28,7 @@ public class Graph {
 
 		
 
-		    double mat[][]=null;
+		    double mat[][]= null;
 	
 			Scanner scf=null;
 			FileWriter fileWriter=null;
@@ -254,7 +254,7 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	 Graphs = Algo_Graph.BLACK_KODKOD(arr, Graphs);
+		    	 Graphs = Algo_Graph.Black_KodKod(arr, Graphs);
 		     }
 		     
 		     double Smallest_Race = Algo_Graph.SmallPath(left_kokod,right_kokod,Graphs)[0];
