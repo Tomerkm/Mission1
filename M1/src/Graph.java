@@ -22,13 +22,30 @@ public class Graph {
 	
 	static final double INF = Double.POSITIVE_INFINITY;
 	public static final Graph_algo Algo_Graph= new Graph_algo();
+	public double[][] mat=null;
 	
-	public double[][] Create_Graph(String Input,String Output) 
+	
+	private void update_Graph(int length)
+	{
+		for(int i=0;i<length;i++)
+		{
+			for(int j=0;j<length;j++)
+			{
+				if(mat[i][j]==0 && i!=j)
+				{
+					mat[i][j] = Double.POSITIVE_INFINITY;
+				}
+				
+			}
+		}
+	}
+	
+	public Graph(String Input,String Output) 
 	{
 
 		
 
-		    double mat[][]= null;
+		
 	
 			Scanner scf=null;
 			FileWriter fileWriter=null;
@@ -89,18 +106,7 @@ public class Graph {
 			}
 		
 			
-			for(int i=0;i<kodkod;i++)
-			{
-				for(int j=0;j<kodkod;j++)
-				{
-					if(mat[i][j]==0 && i!=j)
-					{
-						mat[i][j] = Double.POSITIVE_INFINITY;
-					}
-					
-				}
-			}
-			
+			update_Graph(kodkod);
 			
 			for(int i=0;i<Slahot;i++)
 			{
@@ -128,17 +134,17 @@ public class Graph {
 					e.printStackTrace();
 			}
 		
-			return mat;
+			
 			
 			
 		
 	}
 	
-	public double[][] Create_Graph(String Input) 
+	public Graph(String Input) 
 	{
 
 
-		    double mat[][]=null;
+		
 		    Scanner scf=null;
 			try
 			{
@@ -177,17 +183,7 @@ public class Graph {
 			}
 		
 			
-			for(int i=0;i<kodkod;i++)
-			{
-				for(int j=0;j<kodkod;j++)
-				{
-					if(mat[i][j]==0 && i!=j)
-					{
-						mat[i][j] = Double.POSITIVE_INFINITY;
-					}
-					
-				}
-			}
+			update_Graph(kodkod);
 			
 			
 			
@@ -203,15 +199,15 @@ public class Graph {
 					e.printStackTrace();
 			}
 		
-			return mat;
+		
 			
 			
 		
 	}
 	
-	public double[][] Create_Graph(String Input,String Query,String Output)
+	public Graph(String Input,String Query,String Output)
 	{
-		double Graphs[][] = Create_Graph(Input);
+		mat = new Graph(Input).mat;
 	
 		Scanner scf=null;
 		FileWriter fileWriter=null;
@@ -234,6 +230,7 @@ public class Graph {
 		 Writer.write("\r\n");
 		 
 		 int i=0;
+		 double[][] Graph_Cover=null;
 		 while(i<num_of_query)
 		 {
 			 int left_kokod = scf.nextInt(); 
@@ -254,10 +251,10 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	 Graphs = Algo_Graph.Black_KodKod(arr, Graphs);
+		    	 Graph_Cover = Algo_Graph.Black_KodKod(arr, mat);
 		     }
 		     
-		     double Smallest_Race = Algo_Graph.SmallPath(left_kokod,right_kokod,Graphs)[0];
+		     double Smallest_Race = Algo_Graph.SmallPath(left_kokod,right_kokod,Graph_Cover)[0];
 		     if(Smallest_Race!=Double.POSITIVE_INFINITY)
 		     {
 		     Writer.write(Smallest_Race +"");
@@ -282,7 +279,7 @@ public class Graph {
 		{
 			E.printStackTrace();
 		}
-		return Graphs;
+		
 	}
 	
 
@@ -337,8 +334,8 @@ public class Graph {
     
 	public static void main(String[] args)  {
 		
-	
-		System.out.println("TK2");
+	new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");
+		
 
 		
 	}

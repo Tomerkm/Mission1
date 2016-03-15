@@ -7,9 +7,9 @@ public class Test {
 	public void test(){
 		
 		
-		Graph G = new Graph();
+		Graph G = new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");
 		
-		G.Create_Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");
+	
 		
 		boolean check = Graph.CMP_FILES("C:\\Res\\CMP.txt","C:\\Res\\Out.txt");
 		
