@@ -22,7 +22,7 @@ public class Graph {
 	
 	public static final double INF = Double.POSITIVE_INFINITY;
 	private static final Graph_algo Algo_Graph= new Graph_algo();
-	public double[][] mat_graph=null;
+	private double[][] mat_graph=null;
 
 	
 	/**
