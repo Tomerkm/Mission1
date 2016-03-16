@@ -9,33 +9,33 @@ public class Graph_algo {
 
 	
 
-	public static final double INF = Double.POSITIVE_INFINITY;
+
 	
 	
 	// A Dynamic programming based function to find the shortest path
     // from u to v with exactly k edges.
 	// COMPLEXITY:O(V^3*K)
-	private double shortestPath(double graph[][], int u, int v, int k,int kodkod)
+	private double[][][] shortestPath(double graph[][],int kodkod)
     {
         // Table to be filled up using DP. The value sp[i][j][e] will
         // store weight of the shortest path from i to j with exactly
         // k edges
-        double sp[][][] = new double[kodkod][kodkod][k+1];
+        double sp[][][] = new double[kodkod][kodkod][kodkod+1];
  
         // Loop for number of edges from 0 to k
-        for (int e = 0; e <= k; e++)
+        for (int e = 0; e <= kodkod; e++)
         {
             for (int i = 0; i < kodkod; i++)  // for source
             {
                 for (int j = 0; j < kodkod; j++) // for destination
                 {
                     // initialize value
-                    sp[i][j][e] = INF;
+                    sp[i][j][e] = Graph.INF;
  
                     // from base cases
                     if (e == 0 && i == j)
                         sp[i][j][e] = 0;
-                    if (e == 1 && graph[i][j] != INF)
+                    if (e == 1 && graph[i][j] != Graph.INF)
                         sp[i][j][e] = graph[i][j];
  
                     // go to adjacent only when number of edges is
@@ -46,8 +46,8 @@ public class Graph_algo {
                         {
                             // There should be an edge from i to a and
                             // a should not be same as either i or j
-                            if (graph[i][a] != INF && i != a &&
-                                    j!= a && sp[a][j][e-1] != INF)
+                            if (graph[i][a] != Graph.INF && i != a &&
+                                    j!= a && sp[a][j][e-1] != Graph.INF)
                                 sp[i][j][e] = Math.min(sp[i][j][e],
                                           graph[i][a] + sp[a][j][e-1]);
                         }
@@ -55,54 +55,59 @@ public class Graph_algo {
                 }
             }
         }
-        return sp[u][v][k];
+        return sp;
     }
 	
 	
 
   //a&&b
-    public double[] SmallPath(int p1,int p2,double[][] Graph)
+    public double[] SmallPath(int p1,int p2,double[][] Graphs)
     {
     
-    	double arr[] = new double[2];// first place is Smallest Path  and Second is Length Slahot 
-    	double min=INF;
-    	int kout=Graph.length;
-    	for(int k=1;k<Graph.length;k++)
+    	double arr[] = new double[2];// first place is Smallest Path  and Second is Rib Length 
+    	double min_path= Graph.INF;
+    	int min_rib=Graphs.length;
+    	
+    	
+    	double[][][] Smallest_Path = shortestPath(Graphs,Graphs.length);
+    	
+    	
+    	for(int k=1;k<Graphs.length;k++)
     	{
-    		double Smallest_Path = shortestPath(Graph,p1,p2,k,Graph.length);
     		
-    		if(min>Smallest_Path){
- 	       min= Smallest_Path;
-    		kout=k;
+    		if(min_path>Smallest_Path[p1][p2][k])
+    		{
+    	    min_path= Smallest_Path[p1][p2][k];
+    		min_rib=k;
     		}
 
     	}
-    	arr[0] = min;
-    	arr[1] = kout;
+    	arr[0] = min_path;
+    	arr[1] = min_rib;
     	return arr;
     
     }
     
     
-    public double[][] Black_KodKod(int arr[],double[][] Graph)
+    public double[][] Black_List(int arr[],double[][] Graphs)
     {
     
     	for(int i=0;i<arr.length;i++)
     	{
     		
-    		for(int j=0;j<Graph.length;j++)
+    		for(int j=0;j<Graphs.length;j++)
     		{
     			
-    			Graph[j][arr[i]] = INF;
-    			Graph[arr[i]][j] = INF;
+    			Graphs[j][arr[i]]=Graph.INF;
+    			Graphs[arr[i]][j]=Graph.INF;
     			
 			
     		}
-    		Graph[arr[i]][arr[i]]=0;
+    		Graphs[arr[i]][arr[i]]=0;
     		
     	}
     	
-    	return Graph;
+    	return Graphs;
     	
     	
     	

@@ -20,9 +20,10 @@ public class Graph {
 	
 	
 	
-	static final double INF = Double.POSITIVE_INFINITY;
-	public static final Graph_algo Algo_Graph= new Graph_algo();
-	public double[][] mat=null;
+	public static final double INF = Double.POSITIVE_INFINITY;
+	private static final Graph_algo Algo_Graph= new Graph_algo();
+	public double[][] mat_graph=null;
+
 	
 	
 	private void update_Graph(int length)
@@ -31,9 +32,9 @@ public class Graph {
 		{
 			for(int j=0;j<length;j++)
 			{
-				if(mat[i][j]==0 && i!=j)
+				if(mat_graph[i][j]==0 && i!=j)
 				{
-					mat[i][j] = Double.POSITIVE_INFINITY;
+					mat_graph[i][j] = Double.POSITIVE_INFINITY;
 				}
 				
 			}
@@ -47,7 +48,7 @@ public class Graph {
 
 		
 	
-			Scanner scf=null;
+			Scanner Reader=null;
 			FileWriter fileWriter=null;
 			try
 			{
@@ -59,45 +60,45 @@ public class Graph {
 
 				
 			 FileInputStream fis = new FileInputStream(Input);
-			 scf = new Scanner(fis);
+			 Reader = new Scanner(fis);
 			 
-			 int kodkod=scf.nextInt();
-			 int Slahot=scf.nextInt();
+			 int Vertex=Reader.nextInt();
+			 int Rib=Reader.nextInt();
 			
 		
 			
 			 
-			 Writer.write(( kodkod +""));
+			 Writer.write(( Vertex +""));
 			 Writer.write("\r\n");
 				
 			
 			
-			 Writer.write(Slahot +"");
+			 Writer.write(Rib +"");
 			 Writer.write("\r\n");
 			 
 				
-			mat =  new double[kodkod][kodkod];
+			mat_graph =  new double[Vertex][Vertex];
 
-			int arr_Left_Kod[] = new int[Slahot];
-			int arr_Right_Kod[] = new int[Slahot];
+			int arr_Left_Vertex[] = new int[Rib];
+			int arr_Right_Vertex[] = new int[Rib];
 			int index=0;
 			int size=0;
-			while (size<Slahot) {
+			while (size<Rib) {
 				
-				int i = scf.nextInt();
-				int j = scf.nextInt();
+				int i = Reader.nextInt();
+				int j = Reader.nextInt();
 				
 	
-				arr_Left_Kod[index] = i;
-				arr_Right_Kod[index] = j;
+				arr_Left_Vertex[index] = i;
+				arr_Right_Vertex[index] = j;
 				
 				
-				mat[i][j] = scf.nextDouble();
+				mat_graph[i][j] = Reader.nextDouble();
 				
 				
 				
 				
-				System.out.println( i +" , " + j +  " , " + mat[i][j]);
+				System.out.println( i +" , " + j +  " , " + mat_graph[i][j]);
 				
 				
 				index++;
@@ -106,25 +107,25 @@ public class Graph {
 			}
 		
 			
-			update_Graph(kodkod);
+			update_Graph(Vertex);
 			
-			for(int i=0;i<Slahot;i++)
+			for(int i=0;i<Rib;i++)
 			{
-				double arr[] =  Algo_Graph.SmallPath(arr_Left_Kod[i],arr_Right_Kod[i],mat);
+				double arr[] =  Algo_Graph.SmallPath(arr_Left_Vertex[i],arr_Right_Vertex[i],mat_graph);
 			
-				 Writer.write(arr_Left_Kod[i] +" ");
-				 Writer.write(arr_Right_Kod[i] +" ");
+				 Writer.write(arr_Left_Vertex[i] +" ");
+				 Writer.write(arr_Right_Vertex[i] +" ");
 				 Writer.write(arr[0] +" ");// Shortest Race
-				 Writer.write(arr[1] +""); // num slahot
+				 Writer.write(arr[1] +""); // num Rib
 			
-				 if(i+1!=Slahot)
+				 if(i+1!=Rib)
 				 Writer.write("\r\n");
 				
 			}
 			
 			
 			fis.close();
-			scf.close();
+			Reader.close();
 			Writer.close();
 			
 			
@@ -145,36 +146,36 @@ public class Graph {
 
 
 		
-		    Scanner scf=null;
+		    Scanner Reader=null;
 			try
 			{
 				
 				
 			 FileInputStream fis = new FileInputStream(Input);
-			 scf = new Scanner(fis);
+			 Reader = new Scanner(fis);
 			 
-			 int kodkod=scf.nextInt();
-			 int Slahot=scf.nextInt();
+			 int Vertex=Reader.nextInt();
+			 int Rib=Reader.nextInt();
 				
-			mat =  new double[kodkod][kodkod];
+			mat_graph =  new double[Vertex][Vertex];
 
-			int arr_Left_Kod[] = new int[Slahot];
-			int arr_Right_Kod[] = new int[Slahot];
+			int arr_Left_Vertex[] = new int[Rib];
+			int arr_Right_Vertex[] = new int[Rib];
 			int index=0;
 			int size=0;
-			while (size<Slahot) {
+			while (size<Rib) {
 				
-				int i = scf.nextInt();
-				int j = scf.nextInt();
+				int i = Reader.nextInt();
+				int j = Reader.nextInt();
 				
 	
-				arr_Left_Kod[index] = i;
-				arr_Right_Kod[index] = j;
+				arr_Left_Vertex[index] = i;
+				arr_Right_Vertex[index] = j;
 				
 				
-				mat[i][j] = scf.nextDouble();
+				mat_graph[i][j] = Reader.nextDouble();
 
-				System.out.println( i +" , " + j +  " , " + mat[i][j]);
+				System.out.println( i +" , " + j +  " , " + mat_graph[i][j]);
 				
 				
 				index++;
@@ -183,13 +184,13 @@ public class Graph {
 			}
 		
 			
-			update_Graph(kodkod);
+			update_Graph(Vertex);
 			
 			
 			
 			
 			fis.close();
-			scf.close();
+			Reader.close();
 		
 			
 			
@@ -207,9 +208,9 @@ public class Graph {
 	
 	public Graph(String Input,String Query,String Output)
 	{
-		mat = new Graph(Input).mat;
+		mat_graph = new Graph(Input).mat_graph;
 	
-		Scanner scf=null;
+		Scanner Reader=null;
 		FileWriter fileWriter=null;
 		try
 		{
@@ -221,10 +222,10 @@ public class Graph {
 
 			
 		 FileInputStream fis = new FileInputStream(Query);
-		 scf = new Scanner(fis);
+		 Reader = new Scanner(fis);
 		 
 		 
-		 int num_of_query = scf.nextInt();
+		 int num_of_query = Reader.nextInt();
 		 
 		 Writer.write(num_of_query +"");
 		 Writer.write("\r\n");
@@ -233,12 +234,12 @@ public class Graph {
 		 double[][] Graph_Cover=null;
 		 while(i<num_of_query)
 		 {
-			 int left_kokod = scf.nextInt(); 
-			 int right_kokod = scf.nextInt(); 
-		     Writer.write(left_kokod +" ");	
-		     Writer.write(right_kokod +" ");	
+			 int left_vertex = Reader.nextInt(); 
+			 int right_vertex = Reader.nextInt(); 
+		     Writer.write(left_vertex +" ");	
+		     Writer.write(right_vertex +" ");	
 		     
-		     int count_Black_Code = scf.nextInt();
+		     int count_Black_Code = Reader.nextInt();
 		     Writer.write(count_Black_Code +" ");
 		     if(count_Black_Code!=0)
 		     {
@@ -247,14 +248,14 @@ public class Graph {
 		    	 for(int k=0;k<arr.length;k++)
 		    	 {
 		    	 
-		    		 arr[k] = scf.nextInt();
+		    		 arr[k] = Reader.nextInt();
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	 Graph_Cover = Algo_Graph.Black_KodKod(arr, mat);
+		    	 Graph_Cover = Algo_Graph.Black_List(arr, mat_graph);
 		     }
 		     
-		     double Smallest_Race = Algo_Graph.SmallPath(left_kokod,right_kokod,Graph_Cover)[0];
+		     double Smallest_Race = Algo_Graph.SmallPath(left_vertex,right_vertex,Graph_Cover)[0];
 		     if(Smallest_Race!=Double.POSITIVE_INFINITY)
 		     {
 		     Writer.write(Smallest_Race +"");
@@ -271,7 +272,7 @@ public class Graph {
 		 }
 		 
 		 fis.close();
-		 scf.close();
+		 Reader.close();
 		 Writer.close();
 		
 		}
