@@ -107,7 +107,7 @@ public class Graph_algo {
 
 
 	 */
-    private double[][] Black_List(int arr[],double[][] Graphs)
+    public double[][] Black_List(int arr[],double[][] Graphs)
     {
     
     	for(int i=0;i<arr.length;i++)
