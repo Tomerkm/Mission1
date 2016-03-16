@@ -25,22 +25,37 @@ public class Graph {
 	public double[][] mat_graph=null;
 
 	
-	
+	/**
+
+    פונקציית עזר לעדכון הקודקודים שאינם מצביעים לאף מקום 
+
+
+	 */
 	private void update_Graph(int length)
 	{
 		for(int i=0;i<length;i++)
 		{
 			for(int j=0;j<length;j++)
 			{
-				if(mat_graph[i][j]==0 && i!=j)
+				if(mat_graph[i][j]==0)
 				{
-					mat_graph[i][j] = Double.POSITIVE_INFINITY;
+				 mat_graph[i][j] = Double.POSITIVE_INFINITY;
 				}
 				
 			}
+			mat_graph[i][i]=0;
 		}
 	}
 	
+	
+	
+	/**
+
+    בנאי שממיר מקובץ לגרף קודקודים 
+בנוסף יש קובץ פלט ששומר את הנתונים שבקובץ פלט אך גם שומר את אורך המסלול הקצר ביותר ומס' צלעות
+
+
+	 */
 	public Graph(String Input,String Output) 
 	{
 
@@ -141,6 +156,12 @@ public class Graph {
 		
 	}
 	
+	/**
+
+    בנאי שממיר מקובץ לגרף קודקודים 
+
+
+	 */
 	public Graph(String Input) 
 	{
 
@@ -206,6 +227,13 @@ public class Graph {
 		
 	}
 	
+	
+	/**
+
+    בנאי שממיר מקובץ לגרף קודקודים 
+ושולף נתונים מקובץ שאילתא ושומר לקובץ קלט תמסלול הקצר ביותר בלי לעבור ברשימה השחורה
+
+	 */
 	public Graph(String Input,String Query,String Output)
 	{
 		mat_graph = new Graph(Input).mat_graph;
@@ -284,6 +312,12 @@ public class Graph {
 	}
 	
 
+	/**
+
+    פונקצייה שמשווה בין קבצים
+
+
+	 */
 	public static boolean CMP_FILES(String OutPut,String Comp) 
 	{
 		
@@ -335,8 +369,8 @@ public class Graph {
     
 	public static void main(String[] args)  {
 		
-	new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");
-		
+	
+	new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
 
 		
 	}

@@ -15,6 +15,14 @@ public class Graph_algo {
 	// A Dynamic programming based function to find the shortest path
     // from u to v with exactly k edges.
 	// COMPLEXITY:O(V^3*K)
+	
+	
+	/**
+
+    מחזיר את אורך המסלולים הקצרים ביותר בין כל קודקוד ובתא השלישי הוא שומר את מס' הצעלות
+
+
+	 */
 	private double[][][] shortestPath(double graph[][],int kodkod)
     {
         // Table to be filled up using DP. The value sp[i][j][e] will
@@ -60,7 +68,12 @@ public class Graph_algo {
 	
 	
 
-  //a&&b
+	/**
+
+    מחזיר את אורך המסלול הקצר ביותר ואת מס' המסלולים בין הקודקודים 
+
+
+	 */
     public double[] SmallPath(int p1,int p2,double[][] Graphs)
     {
     
@@ -88,7 +101,12 @@ public class Graph_algo {
     
     }
     
-    
+	/**
+
+    פונקצייה שמסמנת את הקודקודים שנשלחו כרשימה שחורה שאי אפשר לעבור דרכם ולא לצאת מהם
+
+
+	 */
     public double[][] Black_List(int arr[],double[][] Graphs)
     {
     
