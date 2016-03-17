@@ -124,10 +124,14 @@ public class Graph {
 			
 			update_Graph(Vertex);
 			
+		
+			
 			for(int i=0;i<Rib;i++)
 			{
 				double arr[] =  Algo_Graph.SmallPath(arr_Left_Vertex[i],arr_Right_Vertex[i],mat_graph);
 			
+				
+				
 				 Writer.write(arr_Left_Vertex[i] +" ");
 				 Writer.write(arr_Right_Vertex[i] +" ");
 				 Writer.write(arr[0] +" ");// Shortest Race
@@ -136,8 +140,10 @@ public class Graph {
 				 if(i+1!=Rib)
 				 Writer.write("\r\n");
 				
+				
 			}
 			
+		
 			
 			fis.close();
 			Reader.close();
@@ -370,7 +376,7 @@ public class Graph {
 	public static void main(String[] args)  {
 		
 	
-	new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
+	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\Out.txt");	
 
 		
 	}
