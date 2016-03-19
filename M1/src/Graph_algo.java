@@ -16,8 +16,9 @@ public class Graph_algo {
 	
 	/**
 
-	   Create To Array Of Vertex every Vertex (a,b) have the Weight Of Shortest Past and The Count of Edege
-	  
+	   Create Array.size of array=num of the vertexes.  
+	  the array save the shortest path between two vertexes.
+	  ans save the num of ribs that he passed in this path.
 		 */
 	public Graph_algo(EdgeWeightedDigraph Graph,int vertex)
 	{
@@ -32,7 +33,7 @@ public class Graph_algo {
 	
 	
 
-	
+	//return the number of ribs that he passed in this way.
 	  public int Shortest_Path_Count_Rip(EdgeWeightedDigraph Graph,int from,int to)
 	  {
 		 Stack<DirectedEdge> SP = (Stack)(Graph_Shortest_Path[from].pathTo(to));
@@ -42,6 +43,8 @@ public class Graph_algo {
 		 }
 		 return SP.size();
 	  }
+	  
+	  //return the cheapest way from vertex A to vertex B.
 	  
 	  public double Shortest_Path_Weigth(EdgeWeightedDigraph Graph,int from,int to)
 	  {

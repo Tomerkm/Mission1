@@ -57,9 +57,9 @@ public class Graph {
 	/**
 
 
-      Create Matrix And Graph 
-      And save The Result of The Shortest Weight and Count Rib of every distance Between A and B
-      in The Output File
+      Read the InputFile and create Matrix And Graph. 
+      Save The Result of The Shortest Weight and Count Rib of every way Between A and B
+      in The Output File.
 
 	 */
 	public Graph(String Input,String Output) 
@@ -176,7 +176,7 @@ public class Graph {
 	
 	/**
 
-      Get A file TO Read And Create Matrix And Graph
+      Read the Inputfile and Create Matrix And Graph.
        
 
 	 */
@@ -251,8 +251,10 @@ public class Graph {
 	/**
 
 
-      Get Read File To create Matrix Boolean And Graph and Query to put From the Input File and Save
-      The Result of Shortest Path in OutPut file And of course not Pass in Black Vertex
+     Read the InputFile and create Matrix Boolean, Graph and Query.     
+      we saving The Result of Shortest Path in the OutPut file  
+      
+      **and of course the ways dont Pass in the Black Vertex
 
 
 	 */
@@ -356,8 +358,8 @@ public class Graph {
 	/**
 
 
-     The Function Create Black List in The Array of vertex we send 
-     The Vertex Cannot reach to the Black Vertex and not pass in it
+     The Function Create Black List in The Array of vertex that we send.
+     we cannot pass in the black ways.
 
 	 */
     private void Black_List(int arr[],int size,EdgeWeightedDigraph Graph)
@@ -391,12 +393,8 @@ public class Graph {
     
 
 	/**
-
-
-
-     Compare Files using in Tester
-     
-
+     Compare between 2 Files and return true and false. 
+     this function helping us with the testers.
 	 */
 	public static boolean CMP_FILES(String OutPut,String Comp) 
 	{

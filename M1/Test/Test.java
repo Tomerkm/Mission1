@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 public class Test {
 
 	@org.junit.Test
+	//test1
 	public void test(){
-		
-		
+	
 		Graph G = new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");
 		
 	
@@ -14,9 +14,6 @@ public class Test {
 		boolean check = Graph.CMP_FILES("C:\\Res\\CMP.txt","C:\\Res\\Out.txt");
 		
 		assertTrue(check);
-		
-		
-		
 	}
 
 }
