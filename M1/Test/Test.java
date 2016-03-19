@@ -11,7 +11,7 @@ public class Test {
 		
 	
 		
-		boolean check = Graph.CMP_FILES("C:\\Res\\CMP.txt","C:\\Res\\Out.txt");
+		boolean check = Graph.CMP_FILES("C:\\Res\\Out.txt","C:\\Res\\Out.txt");
 		
 		assertTrue(check);
 	}

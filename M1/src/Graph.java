@@ -317,7 +317,7 @@ public class Graph {
 		    	   Black_List(arr,Cover.V(), Cover);
 		     }
 		 
-		     Algo_Graph = new Graph_algo(Cover,mat_graph.length);
+		     Algo_Graph = new Graph_algo(Cover,Inputer.mat_graph.length);
 		     
 		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Cover, left_vertex,right_vertex);
 
@@ -451,9 +451,9 @@ public class Graph {
 
 
 		
-	 new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
+	 //new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\Out.txt");	
 
-		//new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
+		new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
 		
 	}
 
