@@ -1,3 +1,4 @@
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.Vector;
 
 
@@ -21,29 +23,32 @@ public class Graph {
 	
 	
 	public static final double INF = Double.POSITIVE_INFINITY;
-	private static final Graph_algo Algo_Graph= new Graph_algo();
-	private double[][] mat_graph=null;
-
+	private static Graph_algo Algo_Graph;
+	private boolean[][] mat_graph=null;
+	private EdgeWeightedDigraph Graph=null;
 	
 	/**
 
-    פונקציית עזר לעדכון הקודקודים שאינם מצביעים לאף מקום 
-
-
+   The Rest of Vertexes will be INFINITY Weight
+  
 	 */
-	private void update_Graph(int length)
+	private void update_Graph(int length, EdgeWeightedDigraph Graph)
 	{
 		for(int i=0;i<length;i++)
 		{
 			for(int j=0;j<length;j++)
 			{
-				if(mat_graph[i][j]==0)
+	
+				if(!mat_graph[i][j] && i!=j)
 				{
-				 mat_graph[i][j] = Double.POSITIVE_INFINITY;
+				 Graph.addEdge(new DirectedEdge(i,j,Double.POSITIVE_INFINITY));
+				 
 				}
 				
+				
 			}
-			mat_graph[i][i]=0;
+			Graph.addEdge(new DirectedEdge(i,i,0));
+			mat_graph[i][i]=false;
 		}
 	}
 	
@@ -51,17 +56,14 @@ public class Graph {
 	
 	/**
 
-    בנאי שממיר מקובץ לגרף קודקודים 
-בנוסף יש קובץ פלט ששומר את הנתונים שבקובץ פלט אך גם שומר את אורך המסלול הקצר ביותר ומס' צלעות
 
+      Create Matrix And Graph 
+      And save The Result of The Shortest Weight and Count Rib of every distance Between A and B
+      in The Output File
 
 	 */
 	public Graph(String Input,String Output) 
 	{
-
-		
-
-		
 	
 			Scanner Reader=null;
 			FileWriter fileWriter=null;
@@ -81,6 +83,7 @@ public class Graph {
 			 int Rib=Reader.nextInt();
 			
 		
+			  Graph = new EdgeWeightedDigraph(Vertex,Rib);
 			
 			 
 			 Writer.write(( Vertex +""));
@@ -92,29 +95,29 @@ public class Graph {
 			 Writer.write("\r\n");
 			 
 				
-			mat_graph =  new double[Vertex][Vertex];
+			mat_graph = new boolean[Vertex][Vertex];
 
 			int arr_Left_Vertex[] = new int[Rib];
 			int arr_Right_Vertex[] = new int[Rib];
 			int index=0;
 			int size=0;
+			
+			
+		
+			
+			
 			while (size<Rib) {
 				
 				int i = Reader.nextInt();
 				int j = Reader.nextInt();
 				
-	
 				arr_Left_Vertex[index] = i;
 				arr_Right_Vertex[index] = j;
+
 				
-				
-				mat_graph[i][j] = Reader.nextDouble();
-				
-				
-				
-				
-				System.out.println( i +" , " + j +  " , " + mat_graph[i][j]);
-				
+				Graph.addEdge(new DirectedEdge(i,j,Reader.nextDouble()));
+				mat_graph[i][j]=true;
+			
 				
 				index++;
 				size++;
@@ -122,21 +125,30 @@ public class Graph {
 			}
 		
 			
-			update_Graph(Vertex);
-			
-		
-			
+			update_Graph(Vertex,Graph);
+			Algo_Graph = new Graph_algo(Graph,Vertex);
 			for(int i=0;i<Rib;i++)
 			{
-				double arr[] =  Algo_Graph.SmallPath(arr_Left_Vertex[i],arr_Right_Vertex[i],mat_graph);
 			
+				System.out.println(arr_Left_Vertex[i] + " - > " + arr_Right_Vertex[i]);
 				
+				double Weight =  Algo_Graph.Shortest_Path_Weigth(Graph, arr_Left_Vertex[i], arr_Right_Vertex[i]);
+			    int count_Rip =  Algo_Graph.Shortest_Path_Count_Rip(Graph, arr_Left_Vertex[i], arr_Right_Vertex[i]);
+				
+			    
 				
 				 Writer.write(arr_Left_Vertex[i] +" ");
 				 Writer.write(arr_Right_Vertex[i] +" ");
-				 Writer.write(arr[0] +" ");// Shortest Race
-				 Writer.write(arr[1] +""); // num Rib
-			
+				
+				 if(Weight!=Double.POSITIVE_INFINITY)
+				 {
+				 Writer.write(Weight +" ");// Shortest Race
+				 Writer.write(count_Rip +""); // num Rib
+				 }
+				 else
+				 {
+					 Writer.write("inf"); 
+				 }
 				 if(i+1!=Rib)
 				 Writer.write("\r\n");
 				
@@ -164,8 +176,8 @@ public class Graph {
 	
 	/**
 
-    בנאי שממיר מקובץ לגרף קודקודים 
-
+      Get A file TO Read And Create Matrix And Graph
+       
 
 	 */
 	public Graph(String Input) 
@@ -184,8 +196,10 @@ public class Graph {
 			 int Vertex=Reader.nextInt();
 			 int Rib=Reader.nextInt();
 				
-			mat_graph =  new double[Vertex][Vertex];
+			mat_graph =  new boolean[Vertex][Vertex];
 
+			 Graph = new EdgeWeightedDigraph(Vertex,Rib);
+			
 			int arr_Left_Vertex[] = new int[Rib];
 			int arr_Right_Vertex[] = new int[Rib];
 			int index=0;
@@ -199,10 +213,13 @@ public class Graph {
 				arr_Left_Vertex[index] = i;
 				arr_Right_Vertex[index] = j;
 				
-				
-				mat_graph[i][j] = Reader.nextDouble();
+				mat_graph[i][j]=true;
+			
+				double weighter = Reader.nextDouble();
 
-				System.out.println( i +" , " + j +  " , " + mat_graph[i][j]);
+				Graph.addEdge(new DirectedEdge(i,j,weighter));
+				
+				
 				
 				
 				index++;
@@ -211,10 +228,7 @@ public class Graph {
 			}
 		
 			
-			update_Graph(Vertex);
-			
-			
-			
+            update_Graph(Vertex,Graph);
 			
 			fis.close();
 			Reader.close();
@@ -236,14 +250,21 @@ public class Graph {
 	
 	/**
 
-    בנאי שממיר מקובץ לגרף קודקודים 
-ושולף נתונים מקובץ שאילתא ושומר לקובץ קלט תמסלול הקצר ביותר בלי לעבור ברשימה השחורה
+
+      Get Read File To create Matrix Boolean And Graph and Query to put From the Input File and Save
+      The Result of Shortest Path in OutPut file And of course not Pass in Black Vertex
+
 
 	 */
 	public Graph(String Input,String Query,String Output)
 	{
-		mat_graph = new Graph(Input).mat_graph;
+		Graph Inputer = new Graph(Input);
 	
+		
+		
+		this.Graph = Inputer.Graph;
+		this.mat_graph=Inputer.mat_graph;
+		
 		Scanner Reader=null;
 		FileWriter fileWriter=null;
 		try
@@ -275,6 +296,11 @@ public class Graph {
 		     
 		     int count_Black_Code = Reader.nextInt();
 		     Writer.write(count_Black_Code +" ");
+		     
+		
+		     EdgeWeightedDigraph Cover = new EdgeWeightedDigraph(Graph);
+		     
+		     
 		     if(count_Black_Code!=0)
 		     {
 		    	 int arr[] = new int[count_Black_Code];
@@ -286,13 +312,16 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	 Graph_Cover = Algo_Graph.Black_List(arr, mat_graph);
+		    	   Black_List(arr,mat_graph, Cover);
 		     }
+		 
+		     Algo_Graph = new Graph_algo(Cover,mat_graph.length);
 		     
-		     double Smallest_Race = Algo_Graph.SmallPath(left_vertex,right_vertex,Graph_Cover)[0];
-		     if(Smallest_Race!=Double.POSITIVE_INFINITY)
+		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Cover, left_vertex,right_vertex);
+
+		     if(Weight!=Double.POSITIVE_INFINITY)
 		     {
-		     Writer.write(Smallest_Race +"");
+		     Writer.write(Weight +"");
 		     }
 		     else
 		     {
@@ -302,6 +331,10 @@ public class Graph {
 		     {
 			 Writer.write("\r\n");
 		     }
+		     
+		    
+		 
+		     
 			 i++;
 		 }
 		 
@@ -317,11 +350,52 @@ public class Graph {
 		
 	}
 	
+	
+	
 
 	/**
 
-    פונקצייה שמשווה בין קבצים
 
+     The Function Create Black List in The Array of vertex we send 
+     The Vertex Cannot reach to the Black Vertex and not pass in it
+
+	 */
+    private void Black_List(int arr[],boolean[][] mat,EdgeWeightedDigraph Graph)
+    {
+    
+    	for(int i=0;i<arr.length;i++)
+    	{
+    		
+    	
+    		for(int j=0;j<mat.length;j++)
+    		{
+    			
+    			if(j!=arr[i])
+    			{
+    				Graph.Update(new DirectedEdge(arr[i],j,Double.POSITIVE_INFINITY));
+    				Graph.Update(new DirectedEdge(j,arr[i],Double.POSITIVE_INFINITY));
+    			
+    			}
+    			
+    		}
+    		
+    		
+    		
+    	}
+    	
+    
+    	
+    	
+    	
+    }
+    
+
+	/**
+
+
+
+     Compare Files using in Tester
+     
 
 	 */
 	public static boolean CMP_FILES(String OutPut,String Comp) 
@@ -371,13 +445,17 @@ public class Graph {
 		 
 		 
 	}
-    
-    
+  
+	
 	public static void main(String[] args)  {
 		
-	
-	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\Out.txt");	
+		
 
+
+		
+	new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
+
+	
 		
 	}
 
