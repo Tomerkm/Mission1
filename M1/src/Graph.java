@@ -263,7 +263,7 @@ public class Graph {
 		
 		
 		this.Graph = Inputer.Graph;
-		this.mat_graph=Inputer.mat_graph;
+		
 		
 		Scanner Reader=null;
 		FileWriter fileWriter=null;
@@ -312,7 +312,7 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	   Black_List(arr,mat_graph, Cover);
+		    	   Black_List(arr,Cover.V(), Cover);
 		     }
 		 
 		     Algo_Graph = new Graph_algo(Cover,mat_graph.length);
@@ -360,14 +360,14 @@ public class Graph {
      The Vertex Cannot reach to the Black Vertex and not pass in it
 
 	 */
-    private void Black_List(int arr[],boolean[][] mat,EdgeWeightedDigraph Graph)
+    private void Black_List(int arr[],int size,EdgeWeightedDigraph Graph)
     {
     
     	for(int i=0;i<arr.length;i++)
     	{
     		
     	
-    		for(int j=0;j<mat.length;j++)
+    		for(int j=0;j<size;j++)
     		{
     			
     			if(j!=arr[i])
@@ -453,9 +453,9 @@ public class Graph {
 
 
 		
-	new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
+	 new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
 
-	
+		//new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
 		
 	}
 
