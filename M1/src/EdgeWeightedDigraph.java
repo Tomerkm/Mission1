@@ -27,7 +27,11 @@ public class EdgeWeightedDigraph{
 
 		adj = (Vector<DirectedEdge>[]) new Vector[V];
 		for (int v = 0; v < V; v++)
+		{
 			adj[v] = new Vector<DirectedEdge>();
+		
+		}
+		
 	}
 
 
@@ -173,6 +177,7 @@ public class EdgeWeightedDigraph{
 	public Iterable<DirectedEdge> edges() {
 		Vector<DirectedEdge> list = new Vector<DirectedEdge>();
 		for (int v = 0; v < V; v++) {
+			if(adj(v)!=null)
 			for (DirectedEdge e : adj(v)) {
 				list.add(e);
 			}
@@ -181,6 +186,45 @@ public class EdgeWeightedDigraph{
 	} 
 
 	
+	/**
+
+
+    The Function Create Black List in The Graph of vertex that we send - Delete Them.
+    we cannot pass in the black ways.
+
+	 */
+	
+	public void Black_List(int arr[]) {
+
+		for(int i=0;i<arr.length;i++)
+		{
+			validateVertex(arr[i]);
+
+			adj[arr[i]]=null;
+
+			
+			for (int v = 0; v < V; v++) {
+				
+				int index =0;
+				if(adj(v)!=null)
+				for (DirectedEdge e : adj(v)) {
+				
+					
+					int Dest = e.to();
+					int Source = e.from();
+					if(Dest==arr[i])
+					{
+						adj[Source].remove(index);
+					    break;
+					}
+					index++;
+					
+				}
+			}
+		}
+
+	} 
+
 
 	
 	/**

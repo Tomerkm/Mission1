@@ -27,29 +27,6 @@ public class Graph {
 
 	private EdgeWeightedDigraph Graph=null;
 	
-	/**
-
-   The Rest of Vertexes will be INFINITY Weight
-  
-	 */
-	private void update_Graph(int length, EdgeWeightedDigraph Graph)
-	{
-		for(int i=0;i<length;i++)
-		{
-			for (DirectedEdge e : Graph.adj(i)) {
-
-				int j = e.to();
-				if(e.weight()==0 && i!=j)
-				{
-					Graph.addEdge(new DirectedEdge(i,j,Double.POSITIVE_INFINITY));
-				}
-
-			}
-
-			Graph.addEdge(new DirectedEdge(i,i,0));
-
-		}
-	}
 	
 	
 	
@@ -65,7 +42,7 @@ public class Graph {
 	{
 	
 			Scanner Reader=null;
-			FileWriter fileWriter=null;
+
 			try
 			{
 				
@@ -94,15 +71,11 @@ public class Graph {
 			 Writer.write("\r\n");
 			 
 				
-		
-
-			int arr_Left_Vertex[] = new int[Rib];
-			int arr_Right_Vertex[] = new int[Rib];
-			int index=0;
 			int size=0;
 			
 			
 		
+			
 			
 			
 			while (size<Rib) {
@@ -110,34 +83,44 @@ public class Graph {
 				int i = Reader.nextInt();
 				int j = Reader.nextInt();
 				
-				arr_Left_Vertex[index] = i;
-				arr_Right_Vertex[index] = j;
-
 				
 				Graph.addEdge(new DirectedEdge(i,j,Reader.nextDouble()));
 			
 			
-				
-				index++;
 				size++;
 			
 			}
 		
 			
-			update_Graph(Vertex,Graph);
+			fis.close();
+			Reader.close();
+			fis=null;
+			Reader=null;
+			 fis = new FileInputStream(Input);
+			 Reader = new Scanner(fis);
+			
+	
 			Algo_Graph = new Graph_algo(Graph,Vertex);
-			for(int i=0;i<Rib;i++)
+			
+	        Vertex = Reader.nextInt();
+			Rib = Reader.nextInt();
+			
+			for(size=0;size<Rib;size++)
 			{
 			
-				System.out.println(arr_Left_Vertex[i] + " - > " + arr_Right_Vertex[i]);
+			
+				int i = Reader.nextInt();
+				int j = Reader.nextInt();
 				
-				double Weight =  Algo_Graph.Shortest_Path_Weigth(Graph, arr_Left_Vertex[i], arr_Right_Vertex[i]);
-			    int count_Rip =  Algo_Graph.Shortest_Path_Count_Rip(Graph, arr_Left_Vertex[i], arr_Right_Vertex[i]);
+				
+				
+				double Weight =  Algo_Graph.Shortest_Path_Weigth(Graph,i,j);
+			    int count_Rip =  Algo_Graph.Shortest_Path_Count_Rip(Graph,i,j);
 				
 			    
 				
-				 Writer.write(arr_Left_Vertex[i] +" ");
-				 Writer.write(arr_Right_Vertex[i] +" ");
+				 Writer.write(i +" ");
+				 Writer.write(j +" ");
 				
 				 if(Weight!=Double.POSITIVE_INFINITY)
 				 {
@@ -150,6 +133,8 @@ public class Graph {
 				 }
 				 if(i+1!=Rib)
 				 Writer.write("\r\n");
+				 
+				 Weight = Reader.nextDouble();
 				
 				
 			}
@@ -185,47 +170,40 @@ public class Graph {
 
 		
 		    Scanner Reader=null;
-			try
-			{
-				
-				
-			 FileInputStream fis = new FileInputStream(Input);
-			 Reader = new Scanner(fis);
-			 
-			 int Vertex=Reader.nextInt();
-			 int Rib=Reader.nextInt();
-			
+		    try
+		    {
 
-			 Graph = new EdgeWeightedDigraph(Vertex);
-			
-			int arr_Left_Vertex[] = new int[Rib];
-			int arr_Right_Vertex[] = new int[Rib];
-			int index=0;
-			int size=0;
-			while (size<Rib) {
-				
-				int i = Reader.nextInt();
-				int j = Reader.nextInt();
-				
-	
-				arr_Left_Vertex[index] = i;
-				arr_Right_Vertex[index] = j;
-				
-				
-				double weighter = Reader.nextDouble();
 
-				Graph.addEdge(new DirectedEdge(i,j,weighter));
-				
-				
-				
-				
-				index++;
-				size++;
-			
-			}
+		    	FileInputStream fis = new FileInputStream(Input);
+		    	Reader = new Scanner(fis);
+
+		    	int Vertex=Reader.nextInt();
+		    	int Rib=Reader.nextInt();
+
+
+		    	Graph = new EdgeWeightedDigraph(Vertex);
+
+
+		    	int size=0;
+		    	while (size<Rib) {
+
+		    		int i = Reader.nextInt();
+		    		int j = Reader.nextInt();
+
+
+		    		double weighter = Reader.nextDouble();
+
+		    		Graph.addEdge(new DirectedEdge(i,j,weighter));
+
+
+
+
+		    		size++;
+
+		    	
+		    	}
 		
-			
-            update_Graph(Vertex,Graph);
+		
 			
 			fis.close();
 			Reader.close();
@@ -265,7 +243,7 @@ public class Graph {
 		
 		
 		Scanner Reader=null;
-		FileWriter fileWriter=null;
+
 		try
 		{
 			
@@ -285,7 +263,7 @@ public class Graph {
 		 Writer.write("\r\n");
 		 
 		 int i=0;
-		 double[][] Graph_Cover=null;
+	
 		 while(i<num_of_query)
 		 {
 			 int left_vertex = Reader.nextInt(); 
@@ -311,9 +289,10 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	   Black_List(arr,Cover.V(), Cover);
+		    	 Cover.Black_List(arr);
 		     }
 		 
+		    
 		     Algo_Graph = new Graph_algo(Cover,Cover.V());
 		     
 		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Cover, left_vertex,right_vertex);
@@ -351,42 +330,6 @@ public class Graph {
 	
 	
 	
-
-	/**
-
-
-     The Function Create Black List in The Array of vertex that we send.
-     we cannot pass in the black ways.
-
-	 */
-    private void Black_List(int arr[],int size,EdgeWeightedDigraph Graph)
-    {
-    
-    	for(int i=0;i<arr.length;i++)
-    	{
-    		
-    	
-    		for(int j=0;j<size;j++)
-    		{
-    			
-    			if(j!=arr[i])
-    			{
-    				Graph.Update(new DirectedEdge(arr[i],j,Double.POSITIVE_INFINITY));
-    				Graph.Update(new DirectedEdge(j,arr[i],Double.POSITIVE_INFINITY));
-    			
-    			}
-    			
-    		}
-    		
-    		
-    		
-    	}
-    	
-    
-    	
-    	
-    	
-    }
     
 
 	/**
@@ -448,9 +391,10 @@ public class Graph {
 
 
 		
-	//new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
+	//new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\Out.txt");	
 
-	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
+	Graph G = new Graph("C:\\Res\\tinyEWD.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
+
 		
 	}
 

@@ -32,6 +32,7 @@ public class DijkstraSP {
         pq.insert(s, distTo[s]);
         while (!pq.isEmpty()) {
             int v = pq.delMin();
+            if(G.adj(v)!=null)
             for (DirectedEdge e : G.adj(v))
                 relax(e);
         }
