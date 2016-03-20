@@ -7,7 +7,6 @@ public class EdgeWeightedDigraph{
 	private static final String NEWLINE = System.getProperty("line.separator");
 
 	private final int V;                // number of vertices in this digraph
-	private int E;                      // number of edges in this digraph
 	private Vector<DirectedEdge>[] adj;    // adj[v] = adjacency list for vertex v
 
 
@@ -23,7 +22,6 @@ public class EdgeWeightedDigraph{
 
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
 		this.V = V;
-		this.E = 0;
 
 		adj = (Vector<DirectedEdge>[]) new Vector[V];
 		for (int v = 0; v < V; v++)
@@ -36,22 +34,6 @@ public class EdgeWeightedDigraph{
 
 
 
-	public EdgeWeightedDigraph(EdgeWeightedDigraph Other) {
-
-		this(Other.V);
-		if (E < 0) throw new IllegalArgumentException("Number of edges in a Digraph must be nonnegative");
-		this.E=Other.E;
-
-
-		for (int v = 0; v < V; v++) {
-			for (DirectedEdge e : Other.adj(v)) {
-				this.addEdge(e);
-			}
-		}
-
-
-	}
-
 
 	/**
 	 * Returns the number of vertices in this edge-weighted digraph.
@@ -62,14 +44,6 @@ public class EdgeWeightedDigraph{
 		return V;
 	}
 
-	/**
-	 * Returns the number of edges in this edge-weighted digraph.
-	 *
-	 * @return the number of edges in this edge-weighted digraph
-	 */
-	public int E() {
-		return E;
-	}
 
 	// throw an IndexOutOfBoundsException unless 0 <= v < V
 	private void validateVertex(int v) {
@@ -194,12 +168,19 @@ public class EdgeWeightedDigraph{
 
 	 */
 	
-	public void Black_List(int arr[]) {
+	public void Black_List(int arr[],Stack<DirectedEdge> Stk) {
 
 		for(int i=0;i<arr.length;i++)
 		{
 			validateVertex(arr[i]);
 
+			
+			
+			for (DirectedEdge e : adj(arr[i])) {
+				
+				Stk.push(e);
+			}
+			
 			adj[arr[i]]=null;
 
 			
@@ -214,6 +195,7 @@ public class EdgeWeightedDigraph{
 					int Source = e.from();
 					if(Dest==arr[i])
 					{
+						Stk.push(e);
 						adj[Source].remove(index);
 					    break;
 					}
@@ -225,6 +207,31 @@ public class EdgeWeightedDigraph{
 
 	} 
 
+	
+	
+	/**
+
+
+    The Function Return All The Vertexes who They was in the black list and Get Back There Real Value (Weight)
+
+	 */
+	public void Reset(Stack<DirectedEdge> Stk)
+	{
+		while(!Stk.isEmpty())
+		{
+			DirectedEdge e= Stk.pop();
+			
+			int Source = e.from();
+			if(adj[Source]==null)
+			{
+				adj[Source] = new Vector<DirectedEdge>();
+			}
+			
+			adj[Source].add(e);
+			
+		}
+		
+	}
 
 	
 	/**
@@ -235,7 +242,7 @@ public class EdgeWeightedDigraph{
 	 */
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		s.append(V + " " + E + NEWLINE);
+		s.append(V + " " + NEWLINE);
 		for (int v = 0; v < V; v++) {
 			s.append(v + ": ");
 			for (DirectedEdge e : adj[v]) {

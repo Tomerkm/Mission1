@@ -275,9 +275,9 @@ public class Graph {
 		     Writer.write(count_Black_Code +" ");
 		     
 		
-		     EdgeWeightedDigraph Cover = new EdgeWeightedDigraph(Graph);
 		     
 		     
+		     Stack<DirectedEdge> Stk = new Stack<DirectedEdge>(); 
 		     if(count_Black_Code!=0)
 		     {
 		    	 int arr[] = new int[count_Black_Code];
@@ -289,13 +289,13 @@ public class Graph {
 		    		 Writer.write(arr[k] +" ");
 		    		 
 		    	 }
-		    	 Cover.Black_List(arr);
+		    	 Graph.Black_List(arr,Stk);
 		     }
 		 
 		    
-		     Algo_Graph = new Graph_algo(Cover,Cover.V());
+		     Algo_Graph = new Graph_algo(Graph,Graph.V());
 		     
-		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Cover, left_vertex,right_vertex);
+		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Graph, left_vertex,right_vertex);
 
 		     if(Weight!=Double.POSITIVE_INFINITY)
 		     {
@@ -310,7 +310,7 @@ public class Graph {
 			 Writer.write("\r\n");
 		     }
 		     
-		    
+		     Graph.Reset(Stk);
 		 
 		     
 			 i++;
@@ -386,10 +386,6 @@ public class Graph {
   
 	
 	public static void main(String[] args)  {
-		
-		
-
-
 		
 	//new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\Out.txt");	
 
