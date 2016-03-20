@@ -24,7 +24,7 @@ public class Graph {
 	
 	public static final double INF = Double.POSITIVE_INFINITY;
 	private static Graph_algo Algo_Graph;
-	private boolean[][] mat_graph=null;
+
 	private EdgeWeightedDigraph Graph=null;
 	
 	/**
@@ -36,19 +36,18 @@ public class Graph {
 	{
 		for(int i=0;i<length;i++)
 		{
-			for(int j=0;j<length;j++)
-			{
-	
-				if(!mat_graph[i][j] && i!=j)
+			for (DirectedEdge e : Graph.adj(i)) {
+
+				int j = e.to();
+				if(e.weight()==0 && i!=j)
 				{
-				 Graph.addEdge(new DirectedEdge(i,j,Double.POSITIVE_INFINITY));
-				 
+					Graph.addEdge(new DirectedEdge(i,j,Double.POSITIVE_INFINITY));
 				}
-				
-				
+
 			}
+
 			Graph.addEdge(new DirectedEdge(i,i,0));
-			mat_graph[i][i]=false;
+
 		}
 	}
 	
@@ -83,7 +82,7 @@ public class Graph {
 			 int Rib=Reader.nextInt();
 			
 		
-			  Graph = new EdgeWeightedDigraph(Vertex,Rib);
+			  Graph = new EdgeWeightedDigraph(Vertex);
 			
 			 
 			 Writer.write(( Vertex +""));
@@ -95,7 +94,7 @@ public class Graph {
 			 Writer.write("\r\n");
 			 
 				
-			mat_graph = new boolean[Vertex][Vertex];
+		
 
 			int arr_Left_Vertex[] = new int[Rib];
 			int arr_Right_Vertex[] = new int[Rib];
@@ -116,7 +115,7 @@ public class Graph {
 
 				
 				Graph.addEdge(new DirectedEdge(i,j,Reader.nextDouble()));
-				mat_graph[i][j]=true;
+			
 			
 				
 				index++;
@@ -195,10 +194,9 @@ public class Graph {
 			 
 			 int Vertex=Reader.nextInt();
 			 int Rib=Reader.nextInt();
-				
-			mat_graph =  new boolean[Vertex][Vertex];
+			
 
-			 Graph = new EdgeWeightedDigraph(Vertex,Rib);
+			 Graph = new EdgeWeightedDigraph(Vertex);
 			
 			int arr_Left_Vertex[] = new int[Rib];
 			int arr_Right_Vertex[] = new int[Rib];
@@ -213,8 +211,7 @@ public class Graph {
 				arr_Left_Vertex[index] = i;
 				arr_Right_Vertex[index] = j;
 				
-				mat_graph[i][j]=true;
-			
+				
 				double weighter = Reader.nextDouble();
 
 				Graph.addEdge(new DirectedEdge(i,j,weighter));
@@ -260,10 +257,10 @@ public class Graph {
 	 */
 	public Graph(String Input,String Query,String Output)
 	{
+		
+		
 		Graph Inputer = new Graph(Input);
 	
-		
-		
 		this.Graph = Inputer.Graph;
 		
 		
@@ -317,7 +314,7 @@ public class Graph {
 		    	   Black_List(arr,Cover.V(), Cover);
 		     }
 		 
-		     Algo_Graph = new Graph_algo(Cover,Inputer.mat_graph.length);
+		     Algo_Graph = new Graph_algo(Cover,Cover.V());
 		     
 		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Cover, left_vertex,right_vertex);
 
@@ -451,9 +448,9 @@ public class Graph {
 
 
 		
-	 //new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\Out.txt");	
+	//new Graph("C:\\Res\\tinyEWG.txt","C:\\Res\\Out.txt");	
 
-		new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
+	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
 		
 	}
 

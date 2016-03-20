@@ -19,7 +19,7 @@ public class EdgeWeightedDigraph{
 	 * @param  V the number of vertices
 	 * @throws IllegalArgumentException if <tt>V</tt> < 0
 	 */
-	private EdgeWeightedDigraph(int V) {
+	public EdgeWeightedDigraph(int V) {
 
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
 		this.V = V;
@@ -30,21 +30,7 @@ public class EdgeWeightedDigraph{
 			adj[v] = new Vector<DirectedEdge>();
 	}
 
-	/**
-	 * Initializes a random edge-weighted digraph with <tt>V</tt> vertices and <em>E</em> edges.
-	 *
-	 * @param  V the number of vertices
-	 * @param  E the number of edges
-	 * @throws IllegalArgumentException if <tt>V</tt> < 0
-	 * @throws IllegalArgumentException if <tt>E</tt> < 0
-	 */
-	public EdgeWeightedDigraph(int V, int E) {
 
-
-		this(V);
-		if (E < 0) throw new IllegalArgumentException("Number of edges in a Digraph must be nonnegative");
-		this.E=E;
-	}
 
 	public EdgeWeightedDigraph(EdgeWeightedDigraph Other) {
 
@@ -116,14 +102,27 @@ public class EdgeWeightedDigraph{
 
 	public void Update(DirectedEdge e)
 	{
+
 		int v = e.from();
 		int w = e.to();
 		validateVertex(v);
 		validateVertex(w);
-		adj[v].remove(index_Num(v,w));
-		adj[v].add(e);
+		int index = index_Num(v,w);
+		if(index!=-1)
+		{
+		adj[v].set(index, e);
+		}
+		else
+		{
+			adj[v].add(e);
+		}
+		
+		
 	}
 
+
+
+	
 	
 	/**
 	 * Send A Start Vertex And Return The Place of that Vertex Pointer to a destination 
@@ -147,6 +146,10 @@ public class EdgeWeightedDigraph{
 	} 
 
 
+	
+
+	
+	
 	/**
 	 * Returns the directed edges incident from vertex <tt>v</tt>.
 	 *
@@ -177,6 +180,9 @@ public class EdgeWeightedDigraph{
 		return list;
 	} 
 
+	
+
+	
 	/**
 	 * Returns a string representation of this edge-weighted digraph.
 	 *
