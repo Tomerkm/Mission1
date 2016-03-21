@@ -6,6 +6,7 @@ public class DijkstraSP {
     private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
     private IndexMinPQ<Double> pq;    // priority queue of vertices
 
+    
     /**
      * Computes a shortest-paths tree from the source vertex <tt>s</tt> to every other
      * vertex in the edge-weighted digraph <tt>G</tt>.
@@ -27,6 +28,8 @@ public class DijkstraSP {
             distTo[v] = Double.POSITIVE_INFINITY;
         distTo[s] = 0.0;
 
+    
+        
         // relax vertices in order of distance from s
         pq = new IndexMinPQ<Double>(G.V());
         pq.insert(s, distTo[s]);
@@ -51,6 +54,9 @@ public class DijkstraSP {
             else                pq.insert(w, distTo[w]);
         }
     }
+    
+    
+ 
 
     /**
      * Returns the length of a shortest path from the source vertex <tt>s</tt> to vertex <tt>v</tt>.

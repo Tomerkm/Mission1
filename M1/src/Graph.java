@@ -43,6 +43,8 @@ public class Graph {
 	
 			Scanner Reader=null;
 
+			Graph = new Graph(Input).Graph;
+			
 			try
 			{
 				
@@ -59,8 +61,6 @@ public class Graph {
 			 int Rib=Reader.nextInt();
 			
 		
-			  Graph = new EdgeWeightedDigraph(Vertex);
-			
 			 
 			 Writer.write(( Vertex +""));
 			 Writer.write("\r\n");
@@ -73,47 +73,14 @@ public class Graph {
 				
 			int size=0;
 			
-			
-		
-			
-			
+			Algo_Graph = new Graph_algo(Graph,Graph.V());
 			
 			while (size<Rib) {
 				
 				int i = Reader.nextInt();
 				int j = Reader.nextInt();
 				
-				
-				Graph.addEdge(new DirectedEdge(i,j,Reader.nextDouble()));
 			
-			
-				size++;
-			
-			}
-		
-			
-			fis.close();
-			Reader.close();
-			fis=null;
-			Reader=null;
-			 fis = new FileInputStream(Input);
-			 Reader = new Scanner(fis);
-			
-	
-			Algo_Graph = new Graph_algo(Graph,Vertex);
-			
-	        Vertex = Reader.nextInt();
-			Rib = Reader.nextInt();
-			
-			for(size=0;size<Rib;size++)
-			{
-			
-			
-				int i = Reader.nextInt();
-				int j = Reader.nextInt();
-				
-				
-				
 				double Weight =  Algo_Graph.Shortest_Path_Weigth(Graph,i,j);
 			    int count_Rip =  Algo_Graph.Shortest_Path_Count_Rip(Graph,i,j);
 				
@@ -135,9 +102,12 @@ public class Graph {
 				 Writer.write("\r\n");
 				 
 				 Weight = Reader.nextDouble();
-				
-				
+			
+			
+				size++;
+			
 			}
+		
 			
 		
 			
@@ -387,9 +357,9 @@ public class Graph {
 	
 	public static void main(String[] args)  {
 		
-	//new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\Out.txt");	
+	new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\Out.txt");	
 
-	Graph G = new Graph("C:\\Res\\tinyEWD.txt","C:\\Res\\test1.txt","C:\\Res\\Out.txt");
+	
 
 		
 	}
