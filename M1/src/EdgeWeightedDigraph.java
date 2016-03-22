@@ -37,7 +37,35 @@ public class EdgeWeightedDigraph{
         this(Reader.nextInt());
         int E = Reader.nextInt();
 
-        for (int i = 0; i < E; i++) {
+        boolean flag=false;
+        
+        if(E%2==1)
+        {
+        	flag = true;
+        	E--;
+        }
+        
+        for (int i = 0; i < E; i+=2) {
+            int v = Reader.nextInt();
+            int w = Reader.nextInt();
+            if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
+            if (w < 0 || w >= V) throw new IndexOutOfBoundsException("vertex " + w + " is not between 0 and " + (V-1));
+            double weight = Reader.nextDouble();
+            addEdge(new DirectedEdge(v, w, weight));
+            
+            
+            v = Reader.nextInt();
+            w = Reader.nextInt();
+            if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
+            if (w < 0 || w >= V) throw new IndexOutOfBoundsException("vertex " + w + " is not between 0 and " + (V-1));
+            weight = Reader.nextDouble();
+            addEdge(new DirectedEdge(v, w, weight));
+            
+        }
+        
+        
+        if(flag)
+        {
             int v = Reader.nextInt();
             int w = Reader.nextInt();
             if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
@@ -45,6 +73,7 @@ public class EdgeWeightedDigraph{
             double weight = Reader.nextDouble();
             addEdge(new DirectedEdge(v, w, weight));
         }
+        
         Reader.close();
     }
 
