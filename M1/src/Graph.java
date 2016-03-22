@@ -22,7 +22,6 @@ public class Graph {
 	
 	
 	
-	public static final double INF = Double.POSITIVE_INFINITY;
 	private static Graph_algo Algo_Graph;
 
 	private EdgeWeightedDigraph Graph=null;
