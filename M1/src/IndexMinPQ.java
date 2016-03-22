@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer> {
+public class IndexMinPQ<Key extends Comparable<Key>> {
     private int maxN;        // maximum number of elements on PQ
     private int N;           // number of elements on PQ
     private int[] pq;        // binary heap using 1-based indexing
@@ -77,27 +77,6 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
         swim(N);
     }
 
-    /**
-     * Returns an index associated with a minimum key.
-     *
-     * @return an index associated with a minimum key
-     * @throws NoSuchElementException if this priority queue is empty
-     */
-    public int minIndex() {
-        if (N == 0) throw new NoSuchElementException("Priority queue underflow");
-        return pq[1];
-    }
-
-    /**
-     * Returns a minimum key.
-     *
-     * @return a minimum key
-     * @throws NoSuchElementException if this priority queue is empty
-     */
-    public Key minKey() {
-        if (N == 0) throw new NoSuchElementException("Priority queue underflow");
-        return keys[pq[1]];
-    }
 
     /**
      * Removes a minimum key and returns its associated index.
@@ -114,48 +93,6 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
         keys[min] = null;    // to help with garbage collection
         pq[N+1] = -1;        // not needed
         return min;
-    }
-
-    /**
-     * Returns the key associated with index <tt>i</tt>.
-     *
-     * @param  i the index of the key to return
-     * @return the key associated with index <tt>i</tt>
-     * @throws IndexOutOfBoundsException unless 0 &le; <tt>i</tt> &lt; <tt>maxN</tt>
-     * @throws NoSuchElementException no key is associated with index <tt>i</tt>
-     */
-    public Key keyOf(int i) {
-        if (i < 0 || i >= maxN) throw new IndexOutOfBoundsException();
-        if (!contains(i)) throw new NoSuchElementException("index is not in the priority queue");
-        else return keys[i];
-    }
-
-    /**
-     * Change the key associated with index <tt>i</tt> to the specified value.
-     *
-     * @param  i the index of the key to change
-     * @param  key change the key associated with index <tt>i</tt> to this key
-     * @throws IndexOutOfBoundsException unless 0 &le; <tt>i</tt> &lt; <tt>maxN</tt>
-     * @throws NoSuchElementException no key is associated with index <tt>i</tt>
-     */
-    public void changeKey(int i, Key key) {
-        if (i < 0 || i >= maxN) throw new IndexOutOfBoundsException();
-        if (!contains(i)) throw new NoSuchElementException("index is not in the priority queue");
-        keys[i] = key;
-        swim(qp[i]);
-        sink(qp[i]);
-    }
-
-    /**
-     * Change the key associated with index <tt>i</tt> to the specified value.
-     *
-     * @param  i the index of the key to change
-     * @param  key change the key associated with index <tt>i</tt> to this key
-     * @throws IndexOutOfBoundsException unless 0 &le; <tt>i</tt> &lt; <tt>maxN</tt>
-     * @deprecated Replaced by {@link #changeKey(int, Key)}.
-     */
-    public void change(int i, Key key) {
-        changeKey(i, key);
     }
 
     /**
@@ -194,24 +131,7 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
         sink(qp[i]);
     }
 
-    /**
-     * Remove the key associated with index <tt>i</tt>.
-     *
-     * @param  i the index of the key to remove
-     * @throws IndexOutOfBoundsException unless 0 &le; <tt>i</tt> &lt; <tt>maxN</tt>
-     * @throws NoSuchElementException no key is associated with index <t>i</tt>
-     */
-    public void delete(int i) {
-        if (i < 0 || i >= maxN) throw new IndexOutOfBoundsException();
-        if (!contains(i)) throw new NoSuchElementException("index is not in the priority queue");
-        int index = qp[i];
-        exch(index, N--);
-        swim(index);
-        sink(index);
-        keys[i] = null;
-        qp[i] = -1;
-    }
-
+ 
 
    /***************************************************************************
     * General helper functions.
@@ -250,39 +170,6 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
     }
 
 
-   /***************************************************************************
-    * Iterators.
-    ***************************************************************************/
-
-    /**
-     * Returns an iterator that iterates over the keys on the
-     * priority queue in ascending order.
-     * The iterator doesn't implement <tt>remove()</tt> since it's optional.
-     *
-     * @return an iterator that iterates over the keys in ascending order
-     */
-    public Iterator<Integer> iterator() { return new HeapIterator(); }
-
-    private class HeapIterator implements Iterator<Integer> {
-        // create a new pq
-        private IndexMinPQ<Key> copy;
-
-        // add all elements to copy of heap
-        // takes linear time since already in heap order so no keys move
-        public HeapIterator() {
-            copy = new IndexMinPQ<Key>(pq.length - 1);
-            for (int i = 1; i <= N; i++)
-                copy.insert(pq[i], keys[pq[i]]);
-        }
-
-        public boolean hasNext()  { return !copy.isEmpty();                     }
-        public void remove()      { throw new UnsupportedOperationException();  }
-
-        public Integer next() {
-            if (!hasNext()) throw new NoSuchElementException();
-            return copy.delMin();
-        }
-    }
 
 
     /**

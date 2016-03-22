@@ -103,9 +103,11 @@ public class Graph {
 				 
 				 Weight = Reader.nextDouble();
 			
+				 
 			
 				size++;
 			
+				
 			}
 		
 			
@@ -167,6 +169,7 @@ public class Graph {
 
 
 
+		    		
 
 		    		size++;
 
@@ -283,6 +286,7 @@ public class Graph {
 		     Graph.Reset(Stk);
 		 
 		     
+		     
 			 i++;
 		 }
 		 
@@ -357,7 +361,7 @@ public class Graph {
 	
 	public static void main(String[] args)  {
 		
-	new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\Out.txt");	
+	new Graph("C:\\Res\\tinyEWD.txt","C:\\Res\\Out.txt");	
 
 	
 
