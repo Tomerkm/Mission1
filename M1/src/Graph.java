@@ -28,6 +28,45 @@ public class Graph {
 	private EdgeWeightedDigraph Graph=null;
 	
 	
+
+	/**
+
+      Read the Inputfile and Create Matrix And Graph.
+       
+
+	 */
+	public Graph(String Input) 
+	{
+
+
+		
+		    Scanner Reader=null;
+		    try
+		    {
+
+
+		    	FileInputStream fis = new FileInputStream(Input);
+		    	Reader = new Scanner(fis);
+
+		    	Graph = new EdgeWeightedDigraph(Reader);
+
+		    	fis.close();
+		    	Reader.close();
+		
+			
+			
+			}
+			catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		
+		
+			
+			
+		
+	}
+	
 	
 	
 	/**
@@ -125,71 +164,6 @@ public class Graph {
 			}
 		
 			
-			
-			
-		
-	}
-	
-	/**
-
-      Read the Inputfile and Create Matrix And Graph.
-       
-
-	 */
-	public Graph(String Input) 
-	{
-
-
-		
-		    Scanner Reader=null;
-		    try
-		    {
-
-
-		    	FileInputStream fis = new FileInputStream(Input);
-		    	Reader = new Scanner(fis);
-
-		    	int Vertex=Reader.nextInt();
-		    	int Rib=Reader.nextInt();
-
-
-		    	Graph = new EdgeWeightedDigraph(Vertex);
-
-
-		    	int size=0;
-		    	while (size<Rib) {
-
-		    		int i = Reader.nextInt();
-		    		int j = Reader.nextInt();
-
-
-		    		double weighter = Reader.nextDouble();
-
-		    		Graph.addEdge(new DirectedEdge(i,j,weighter));
-
-
-
-		    		
-
-		    		size++;
-
-		    	
-		    	}
-		
-		
-			
-			fis.close();
-			Reader.close();
-		
-			
-			
-			}
-			catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-			}
-		
-		
 			
 			
 		

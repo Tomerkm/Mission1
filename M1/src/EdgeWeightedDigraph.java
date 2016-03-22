@@ -1,10 +1,10 @@
+import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
 
 
 public class EdgeWeightedDigraph{
 
-	private static final String NEWLINE = System.getProperty("line.separator");
 
 	private final int V;                // number of vertices in this digraph
 	private Vector<DirectedEdge>[] adj;    // adj[v] = adjacency list for vertex v
@@ -32,6 +32,21 @@ public class EdgeWeightedDigraph{
 		
 	}
 
+    public EdgeWeightedDigraph(Scanner Reader) {
+    	
+        this(Reader.nextInt());
+        int E = Reader.nextInt();
+
+        for (int i = 0; i < E; i++) {
+            int v = Reader.nextInt();
+            int w = Reader.nextInt();
+            if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
+            if (w < 0 || w >= V) throw new IndexOutOfBoundsException("vertex " + w + " is not between 0 and " + (V-1));
+            double weight = Reader.nextDouble();
+            addEdge(new DirectedEdge(v, w, weight));
+        }
+        Reader.close();
+    }
 
 
 
@@ -234,24 +249,6 @@ public class EdgeWeightedDigraph{
 	}
 
 	
-	/**
-	 * Returns a string representation of this edge-weighted digraph.
-	 *
-	 * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
-	 *         followed by the <em>V</em> adjacency lists of edges
-	 */
-	public String toString() {
-		StringBuilder s = new StringBuilder();
-		s.append(V + " " + NEWLINE);
-		for (int v = 0; v < V; v++) {
-			s.append(v + ": ");
-			for (DirectedEdge e : adj[v]) {
-				s.append(e + "  ");
-			}
-			s.append(NEWLINE);
-		}
-		return s.toString();
-	}
 
 
 
