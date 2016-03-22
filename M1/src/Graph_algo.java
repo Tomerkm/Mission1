@@ -20,14 +20,10 @@ public class Graph_algo {
 	  the array save the shortest path between two vertexes.
 	  ans save the num of ribs that he passed in this path.
 		 */
-	public Graph_algo(EdgeWeightedDigraph Graph,int vertex)
+	public Graph_algo(int vertex)
 	{
 		Graph_Shortest_Path = new DijkstraSP[vertex];
 		
-		for(int i=0;i<vertex;i++)
-		{
-			Graph_Shortest_Path[i] = new DijkstraSP(Graph,i);
-		}
 		
 	}
 	
@@ -48,6 +44,9 @@ public class Graph_algo {
 	  
 	  public double Shortest_Path_Weigth(EdgeWeightedDigraph Graph,int from,int to)
 	  {
+		  
+		  Graph_Shortest_Path[from] = new DijkstraSP(Graph,from);
+		  
 		 return Graph_Shortest_Path[from].distTo(to);
 	  }
 	  

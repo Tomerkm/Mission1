@@ -111,7 +111,7 @@ public class Graph {
 				
 			int size=0;
 			
-			Algo_Graph = new Graph_algo(Graph,Graph.V());
+			Algo_Graph = new Graph_algo(Graph.V());
 			
 			while (size<Rib) {
 				
@@ -210,6 +210,8 @@ public class Graph {
 		 
 		 int i=0;
 	
+		  Algo_Graph = new Graph_algo(Graph.V());
+		 
 		 while(i<num_of_query)
 		 {
 			 int left_vertex = Reader.nextInt(); 
@@ -239,7 +241,7 @@ public class Graph {
 		     }
 		 
 		    
-		     Algo_Graph = new Graph_algo(Graph,Graph.V());
+		   
 		     
 		     double Weight =  Algo_Graph.Shortest_Path_Weigth(Graph, left_vertex,right_vertex);
 
@@ -334,7 +336,7 @@ public class Graph {
 	
 	public static void main(String[] args)  {
 		
-	new Graph("C:\\Res\\tinyEWD.txt","C:\\Res\\Out.txt");	
+	new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\test3.txt","C:\\Res\\Out.txt");	
 
 	
 
