@@ -23,12 +23,32 @@ public class EdgeWeightedDigraph{
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
 		this.V = V;
 
+		
+		
+		
 		adj = (Vector<DirectedEdge>[]) new Vector[V];
-		for (int v = 0; v < V; v++)
+		
+
+        boolean flag=false;
+        
+        if(V%2==1)
+        {
+        	flag = true;
+        	V--;
+        }
+		
+		for (int v = 0; v < V; v+=2)
 		{
 			adj[v] = new Vector<DirectedEdge>();
-		
+			adj[v+1] = new Vector<DirectedEdge>();
+			
 		}
+		
+		if(flag)
+		{
+			adj[V-1] = new Vector<DirectedEdge>();
+		}
+
 		
 	}
 

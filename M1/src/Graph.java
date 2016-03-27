@@ -365,7 +365,7 @@ public class Graph {
 	{	
 	
 		
-	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test3.txt","Out.txt");	
+	new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\test3.txt","Out.txt");	
 	}
 	
 
