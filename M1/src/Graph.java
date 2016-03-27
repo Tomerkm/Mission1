@@ -339,35 +339,43 @@ public class Graph {
 	
     
 
-		
-	if(args.length!=0)
-	{
-		
-		System.out.println("THE FILES WE PUT ON THE ARGS");
-		
-		for(String e:args)
+		try
 		{
-		 
-		  System.out.println(e);
+
+			if(args.length!=0)
+			{
+
+				System.out.println("THE FILES WE PUT ON THE ARGS");
+
+				for(String e:args)
+				{
+
+					System.out.println(e);
+				}
+
+				if(args.length==1)
+				{
+					new Graph(args[0],"Out.txt");	
+				}
+				else
+				{
+					new Graph(args[0],args[1],"Out.txt");	
+				}
+
+			}
+			else
+			{	
+
+
+				new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\test3.txt","Out.txt");	
+			}
+			System.out.println("The File is Uploaded To The Project File - You may Press Refresh On the Project And See The File Or You can put the File in Other Folder");
 		}
-		
-		if(args.length==1)
+		catch (Exception E)
 		{
-			new Graph(args[0],"Out.txt");	
+			System.out.println(E.getMessage());
 		}
-		else
-		{
-			new Graph(args[0],args[1],"Out.txt");	
-		}
-		
-	}
-	else
-	{	
-	
-		
-	new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\test3.txt","Out.txt");	
-	}
-	
+
 
 		
 	}
