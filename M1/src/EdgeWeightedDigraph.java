@@ -29,26 +29,16 @@ public class EdgeWeightedDigraph{
 		adj = (Vector<DirectedEdge>[]) new Vector[V];
 		
 
-        boolean flag=false;
-        
-        if(V%2==1)
-        {
-        	flag = true;
-        	V--;
-        }
+
 		
-		for (int v = 0; v < V; v+=2)
+		for (int v = 0; v < V; v++)
 		{
 			adj[v] = new Vector<DirectedEdge>();
-			adj[v+1] = new Vector<DirectedEdge>();
+		
 			
 		}
 		
-		if(flag)
-		{
-			adj[V-1] = new Vector<DirectedEdge>();
-		}
-
+	
 		
 	}
 
@@ -241,7 +231,7 @@ public class EdgeWeightedDigraph{
 			
 			
 			for (DirectedEdge e : adj(arr[i])) {
-				
+				if(e!=null)
 				Stk.push(e);
 			}
 			
