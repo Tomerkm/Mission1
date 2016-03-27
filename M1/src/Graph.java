@@ -336,10 +336,21 @@ public class Graph {
 	
 	public static void main(String[] args)  {
 		
-		
+	
+    
+
 		
 	if(args.length!=0)
 	{
+		
+		System.out.println("THE FILES WE PUT ON THE ARGS");
+		
+		for(String e:args)
+		{
+		 
+		  System.out.println(e);
+		}
+		
 		if(args.length==1)
 		{
 			new Graph(args[0],"Out.txt");	
@@ -352,6 +363,8 @@ public class Graph {
 	}
 	else
 	{	
+	
+		
 	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test3.txt","Out.txt");	
 	}
 	
