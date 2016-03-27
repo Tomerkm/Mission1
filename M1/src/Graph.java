@@ -336,8 +336,24 @@ public class Graph {
 	
 	public static void main(String[] args)  {
 		
-	new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\test3.txt","C:\\Res\\Out.txt");	
-
+		
+		
+	if(args.length!=0)
+	{
+		if(args.length==1)
+		{
+			new Graph(args[0],"Out.txt");	
+		}
+		else
+		{
+			new Graph(args[0],args[1],"Out.txt");	
+		}
+		
+	}
+	else
+	{	
+	new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test3.txt","Out.txt");	
+	}
 	
 
 		
