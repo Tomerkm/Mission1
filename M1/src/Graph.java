@@ -31,17 +31,17 @@ public class Graph {
 	/**
 
       Read the Inputfile and Create Matrix And Graph.
+	 * @throws IOException 
        
 
 	 */
-	public Graph(String Input) 
+	public Graph(String Input) throws IOException 
 	{
 
 
 		
 		    Scanner Reader=null;
-		    try
-		    {
+		   
 
 
 		    	FileInputStream fis = new FileInputStream(Input);
@@ -54,11 +54,8 @@ public class Graph {
 		
 			
 			
-			}
-			catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-			}
+			
+		
 		
 		
 			
@@ -74,18 +71,17 @@ public class Graph {
       Read the InputFile and create Matrix And Graph. 
       Save The Result of The Shortest Weight and Count Rib of every way Between A and B
       in The Output File.
+	 * @throws IOException 
 
 	 */
-	public Graph(String Input,String Output) 
+	public Graph(String Input,String Output) throws IOException 
 	{
 	
 			Scanner Reader=null;
 
 			Graph = new Graph(Input).Graph;
 			
-			try
-			{
-				
+		
 		
 			File file = new File(Output);
 			FileWriter Writer = new FileWriter(file,false);
@@ -156,11 +152,8 @@ public class Graph {
 			Writer.close();
 			
 			
-			}
-			catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-			}
+			
+	
 		
 			
 			
@@ -176,10 +169,11 @@ public class Graph {
       we saving The Result of Shortest Path in the OutPut file  
       
       **and of course the ways dont Pass in the Black Vertex
+	 * @throws IOException 
 
 
 	 */
-	public Graph(String Input,String Query,String Output)
+	public Graph(String Input,String Query,String Output) throws IOException
 	{
 		
 		
@@ -284,12 +278,12 @@ public class Graph {
 	/**
      Compare between 2 Files and return true and false. 
      this function helping us with the testers.
+	 * @throws IOException 
 	 */
-	public static boolean CMP_FILES(String OutPut,String Comp) 
+	public static boolean CMP_FILES(String OutPut,String Comp) throws IOException 
 	{
 		
-		try
-		{
+	
 		FileReader fr_Output = new FileReader(OutPut);
 		BufferedReader br_Output = new BufferedReader(fr_Output);
 		
@@ -323,11 +317,8 @@ public class Graph {
 			 return true;
 		 }
 	
-		}
-		catch (Exception E)
-		{
-			E.printStackTrace();
-		}
+		
+	
 		return false;
 		 
 		 
@@ -365,9 +356,7 @@ public class Graph {
 			}
 			else
 			{	
-
-
-				new Graph("C:\\Res\\largeEWD.txt","C:\\Res\\test3.txt","Out.txt");	
+				new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test3.txt","Out.txt");	
 			}
 			System.out.println("The File is Uploaded To The Project File - You may Press Refresh On the Project And See The File Or You can put the File in Other Folder");
 		}
