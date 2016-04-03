@@ -346,19 +346,21 @@ public class Graph {
 
 				if(args.length==1)
 				{
-					new Graph(args[0],"Out.txt");	
+				
+					new Graph(args[0],"C:\\Users\\user\\Downloads\\Desktop\\Out.txt");	
 				}
 				else
 				{
-					new Graph(args[0],args[1],"Out.txt");	
+					new Graph(args[0],args[1],"C:\\Users\\user\\Downloads\\Desktop\\Out.txt");	
 				}
 
 			}
 			else
 			{	
-				new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test3.txt","Out.txt");	
+				//You can Run the Code with Eclipse To By Changing The Place of The Files.
+				new Graph("C:\\Res\\mediumEWD.txt","C:\\Res\\test3.txt","C:\\Users\\user\\Downloads\\Desktop\\Out.txt");	
 			}
-			System.out.println("The File is Uploaded To The Project File - You may Press Refresh On the Project And See The File Or You can put the File in Other Folder");
+			System.out.println("The File is Uploaded To The Desktop");
 		}
 		catch (Exception E)
 		{
